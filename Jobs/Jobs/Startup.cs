@@ -12,6 +12,10 @@ using Jobs.Data;
 using Jobs.Models;
 using Jobs.Services;
 
+using Jobs.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace Jobs
 {
     public class Startup
@@ -29,6 +33,8 @@ namespace Jobs
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            var connection = @"Server=(local);Database=Jobs;Integrated Security=True;Trusted_Connection=True;";
+            services.AddDbContext<JobsContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
