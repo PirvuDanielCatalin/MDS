@@ -3310,7 +3310,8 @@ input[type=submit].btn-block {
 }
 
 .collapse {
-    display: none
+    /*display: none*/
+    float:right;
 }
 
 .collapse.show {
@@ -4230,6 +4231,7 @@ tbody.collapse.show {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center
+    
 }
 
 .navbar-toggler {

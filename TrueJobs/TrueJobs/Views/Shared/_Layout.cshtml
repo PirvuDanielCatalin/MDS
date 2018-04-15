@@ -49,16 +49,18 @@
                 <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
             </div>
 
-            <nav id="nav-menu-container">
+            <nav id="nav-menu-container navbar-collapse collapse">
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="@Url.Action("Index", "Home")#intro">Acasa</a></li>
                     <li><a href="@Url.Action("Index", "Home")#about">Despre noi</a></li>
                     <li><a href="@Url.Action("Index", "Home")#facts">Statistici</a></li>
 
                     <li><a href="@Url.Action("Index", "Home")#contact">Contact</a></li>
-                    <li><a href="@Url.Action("Register", "Account")">Cont nou</a></li>
-                    <li><a href="@Url.Action("Login", "Account")">Intra in cont</a></li>
+                    @*<li><a href="@Url.Action("Register", "Account")">Cont nou</a></li>
+            <li><a href="@Url.Action("Login", "Account")">Intra in cont</a></li>*@
+
                 </ul>
+                @Html.Partial("_LoginPartial")
             </nav><!-- #nav-menu-container -->
         </div>
     </header><!-- #header -->
