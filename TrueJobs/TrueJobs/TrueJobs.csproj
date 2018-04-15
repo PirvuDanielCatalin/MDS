@@ -245,26 +245,60 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\ionicons\css\ionicons.min.css" />
+    <Content Include="Content\css\ionicons\fonts\ionicons.svg" />
+    <Content Include="Content\css\lightbox.min.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\img_biz\4.jpg" />
+    <Content Include="Content\img_biz\about-bg.jpg" />
+    <Content Include="Content\img_biz\apple-touch-icon.png" />
+    <Content Include="Content\img_biz\call-to-action-bg.jpg" />
+    <Content Include="Content\img_biz\facts-bg.jpg" />
+    <Content Include="Content\img_biz\favicon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\ionicons\fonts\ionicons.eot" />
+    <Content Include="Content\css\ionicons\fonts\ionicons.ttf" />
+    <Content Include="Content\css\ionicons\fonts\ionicons.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\counterup.min.js" />
+    <Content Include="Scripts\easing.min.js" />
+    <Content Include="Scripts\hoverIntent.js" />
+    <Content Include="Scripts\isotope.pkgd.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-migrate.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.touchSwipe.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lightbox.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\superfish.min.js" />
+    <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Scripts\wow.min.js" />
     <Content Include="TrueJobsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TrueJobsModel.edmx</DependentUpon>
