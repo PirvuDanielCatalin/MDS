@@ -30,12 +30,21 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-2"></div>
+        @*<div class="col-md-2"></div>
         <div class="col-md-10">
             <input type="radio" name="radio" id="1" value="candidat" />Caut loc de munca
             <input type="radio" name="radio" id="2" value="companie" />Sunt companie
+        </div>*@
+        @*@Html.RadioButtonFor(m => m.YesNo, "Caut loc de munca")
+        @Html.RadioButtonFor(m => m.YesNo, "Sunt Companie")*@
+        <div class="col-md-2">Cauti loc de munca?</div>
+        <div class="col-md-10">
+            @*@Html.RadioButtonFor(model => model.YesNo, "Yes", true) Da  @Html.RadioButtonFor(model => model.YesNo, "No", false) Nu, sunt companie*@
+            @Html.RadioButtonFor(model => model.YesNo, true) Da
+            @Html.RadioButtonFor(model=>model.YesNo, false) Nu, sunt companie
         </div>
-       
+     
+
 
     </div>
     <div class="form-group">

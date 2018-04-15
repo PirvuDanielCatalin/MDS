@@ -157,14 +157,18 @@ namespace TrueJobs.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    if (radio == "candidat")
+                    //if (radio == "candidat")
+                    if(model.YesNo == true)
                     {
                         await UserManager.AddToRoleAsync(user.Id, "candidat");
                         return RedirectToAction("Create", "Users");
                     }
-                    else if (radio == "companie") {
+                    else if (/*radio == "companie"*/ model.YesNo==false) {
                         await UserManager.AddToRoleAsync(user.Id, "companie");
                         return RedirectToAction("Create", "Companies");
+                    } else if(radio == null){
+                        await UserManager.AddToRoleAsync(user.Id, "admin");
+                        return RedirectToAction("Index", "Home");
                     }
                        
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

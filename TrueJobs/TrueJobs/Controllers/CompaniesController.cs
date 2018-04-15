@@ -46,7 +46,7 @@ namespace TrueJobs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Company_ID,Name,Email,Location")] Company company)
+        public ActionResult Create(/*[Bind(Include = "Company_ID,Name,Email,Location")] */Company company)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace TrueJobs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Company_ID,Name,Email,Location")] Company company)
+        public ActionResult Edit(/*[Bind(Include = "Company_ID,Name,Email,Location")] */Company company)
         {
             if (ModelState.IsValid)
             {

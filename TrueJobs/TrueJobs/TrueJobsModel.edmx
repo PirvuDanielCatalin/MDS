@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JobsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JobsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="Application_ID" />
@@ -21,6 +21,7 @@
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Email" Type="nchar" MaxLength="300" />
           <Property Name="Location" Type="nchar" MaxLength="300" />
+          <Property Name="Photo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CV">
           <Key>
@@ -60,7 +61,7 @@
           <Property Name="LastName" Type="nchar" MaxLength="255" />
           <Property Name="Email" Type="nchar" MaxLength="255" />
           <Property Name="Phone" Type="int" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Photo" Type="nvarchar(max)" />
           <Property Name="Location" Type="nvarchar" MaxLength="200" />
           <Property Name="Experience" Type="int" />
         </EntityType>
@@ -194,8 +195,7 @@
             <End Role="Users_interests" EntitySet="Users_interests" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JobsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -218,6 +218,7 @@
           <Property Name="Email" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
           <Property Name="Location" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Jobs" Relationship="Self.FK_Jobs_Companies" FromRole="Companies" ToRole="Jobs" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CV">
           <Key>
@@ -262,7 +263,7 @@
           <Property Name="LastName" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Phone" Type="Int32" />
-          <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Experience" Type="Int32" />
           <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Users" FromRole="Users" ToRole="Applications" />
@@ -420,6 +421,7 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="JobsModel.Company">
               <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

@@ -10,108 +10,107 @@ using TrueJobs;
 
 namespace TrueJobs.Controllers
 {
-    public class UsersController : Controller
+    public class InterestsController : Controller
     {
         private JobsEntities db = new JobsEntities();
 
-        // GET: Users
+        // GET: Interests
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Interests.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Interests/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Interest interest = db.Interests.Find(id);
+            if (interest == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(interest);
         }
 
-        // GET: Users/Create
+        // GET: Interests/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Interests/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "User_ID,FirstName,LastName,Email,Phone,Photo,Location,Experience")]*/ User user)
+        public ActionResult Create(/*[Bind(Include = "Interest_ID,Name")] */Interest interest)
         {
             if (ModelState.IsValid)
             {
-                user.Email = User.Identity.Name;
-                db.Users.Add(user);
+                db.Interests.Add(interest);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(interest);
         }
 
-        // GET: Users/Edit/5
+        // GET: Interests/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Interest interest = db.Interests.Find(id);
+            if (interest == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(interest);
         }
 
-        // POST: Users/Edit/5
+        // POST: Interests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Include = "User_ID,FirstName,LastName,Email,Phone,Photo,Location,Experience")] */User user)
+        public ActionResult Edit(/*[Bind(Include = "Interest_ID,Name")]*/ Interest interest)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(interest).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(interest);
         }
 
-        // GET: Users/Delete/5
+        // GET: Interests/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Interest interest = db.Interests.Find(id);
+            if (interest == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(interest);
         }
 
-        // POST: Users/Delete/5
+        // POST: Interests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            Interest interest = db.Interests.Find(id);
+            db.Interests.Remove(interest);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
