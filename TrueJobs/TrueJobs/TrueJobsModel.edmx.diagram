@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb452a5187b44c03af67b10ae6938513" Name="Diagram1">
+        <EntityTypeShape EntityType="JobsModel.Application" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.Company" Width="1.5" PointX="2.625" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.CV" Width="1.5" PointX="4.375" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.Interest" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.Job" Width="1.5" PointX="1.875" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.User" Width="1.5" PointX="6.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobsModel.Users_interests" Width="1.5" PointX="10.125" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="JobsModel.FK_Applications_Jobs" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_Applications_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_Jobs_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_CV_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_Users_interests_Interests" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_Users_interests_Jobs" ManuallyRouted="false" />
+        <AssociationConnector Association="JobsModel.FK_Users_interests_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
