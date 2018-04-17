@@ -1304,9 +1304,16 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding: 0 0 30px 0;
   color: #eee;
   font-size: 14px;
-   position:absolute;
-   bottom:0;
-   width:100%;
+   bottom:0; 
+}
+#footer1 {
+    background: #000;
+    padding: 0 0 30px 0;
+    color: #eee;
+    font-size: 14px;
+    bottom: 0;
+    position:absolute;
+    width:100%; 
 }
 
 #footer .footer-top {
