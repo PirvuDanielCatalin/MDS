@@ -1304,6 +1304,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding: 0 0 30px 0;
   color: #eee;
   font-size: 14px;
+   position:absolute;
+   bottom:0;
+   width:100%;
 }
 
 #footer .footer-top {
