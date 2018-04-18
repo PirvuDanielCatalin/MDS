@@ -259,6 +259,7 @@
     <Content Include="Content\img_biz\apple-touch-icon.png" />
     <Content Include="Content\img_biz\call-to-action-bg.jpg" />
     <Content Include="Content\img_biz\facts-bg.jpg" />
+    <Content Include="Content\img_biz\facts-bg2.jpg" />
     <Content Include="Content\img_biz\favicon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
