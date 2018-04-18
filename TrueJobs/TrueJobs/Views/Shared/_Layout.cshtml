@@ -16,7 +16,7 @@
     <link href="~/Content/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
-<body style="background-color: #88ff4d">
+<body @*style="background-color: #88ff4d"*@>
 
     @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -52,21 +52,9 @@
                 <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
             </div>
 
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="@Url.Action("Index", "Home")#intro">Acasa</a></li>
-                    <li><a href="@Url.Action("Index", "Home")#about">Despre noi</a></li>
-                    <li><a href="@Url.Action("Index", "Home")#facts">Statistici</a></li>
-
-                    <li><a href="@Url.Action("Index", "Home")#contact">Contact</a></li>
-
+        
                     @Html.Partial("_LoginPartial")
-                    @*<li><a href="@Url.Action("Register", "Account")">Cont nou</a></li>
-        <li><a href="@Url.Action("Login", "Account")">Intra in cont</a></li>*@
-
-                </ul>
-               
-            </nav><!-- #nav-menu-container -->
+             
         </div>
     </header><!-- #header -->
 
