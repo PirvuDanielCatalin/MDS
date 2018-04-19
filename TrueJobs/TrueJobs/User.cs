@@ -28,8 +28,9 @@ namespace TrueJobs
         public string Email { get; set; }
         public Nullable<int> Phone { get; set; }
         public string Photo { get; set; }
-        public string Location { get; set; }
         public Nullable<int> Experience { get; set; }
+        public string County { get; set; }
+        public string City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }

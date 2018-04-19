@@ -18,7 +18,6 @@ namespace TrueJobs
         public Job()
         {
             this.Applications = new HashSet<Application>();
-            this.Users_interests = new HashSet<Users_interests>();
         }
     
         public int Job_ID { get; set; }
@@ -30,11 +29,12 @@ namespace TrueJobs
         public string Interest { get; set; }
         public Nullable<int> Experience { get; set; }
         public Nullable<int> Company_ID { get; set; }
+        public Nullable<int> Interest_ID { get; set; }
+        public string Attributes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
         public virtual Company Company { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users_interests> Users_interests { get; set; }
+        public virtual Interest Interest1 { get; set; }
     }
 }

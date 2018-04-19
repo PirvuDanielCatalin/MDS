@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,7 +13,7 @@ namespace TrueJobs.Controllers
 {
     public class UsersController : Controller
     {
-        private JobsEntities db = new JobsEntities();
+        private JobsEntities2 db = new JobsEntities2();
 
         // GET: Users
         public ActionResult Index()
@@ -46,13 +47,46 @@ namespace TrueJobs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "User_ID,FirstName,LastName,Email,Phone,Photo,Location,Experience")]*/ User user)
+        public ActionResult Create(HttpPostedFileBase file2, CV cv, IEnumerable<HttpPostedFileBase> files, User user)
         {
+
+            if (file2 != null && file2.ContentLength > 0)
+            {
+                // extract only the filename
+                var fileName = Path.GetFileNameWithoutExtension(file2.FileName) + " _ " + DateTime.Now.ToString("ddHmmss") + Path.GetExtension(file2.FileName);
+               
+                var path = Path.Combine(Server.MapPath("~/App_Data/imgpoze"), fileName);
+                user.Photo = fileName;
+
+                file2.SaveAs(path);
+               
+
+
+            }
+
             if (ModelState.IsValid)
             {
                 user.Email = User.Identity.Name;
                 db.Users.Add(user);
                 db.SaveChanges();
+
+                foreach (var file in files)
+                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName_att = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName_att);
+                        cv.CV_path = fileName_att;
+                        cv.User_ID = user.User_ID;
+                        file.SaveAs(path);
+
+
+                        db.CVs.Add(cv);
+                        db.SaveChanges();
+
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -112,6 +146,7 @@ namespace TrueJobs.Controllers
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);
+            db.CVs.RemoveRange(db.CVs.Where(c => c.User_ID == id));
             db.SaveChanges();
             return RedirectToAction("Index");
         }

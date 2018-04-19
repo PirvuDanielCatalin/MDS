@@ -12,7 +12,7 @@ namespace TrueJobs.Controllers
 {
     public class CompaniesController : Controller
     {
-        private JobsEntities db = new JobsEntities();
+        private JobsEntities2 db = new JobsEntities2();
 
         // GET: Companies
         public ActionResult Index()

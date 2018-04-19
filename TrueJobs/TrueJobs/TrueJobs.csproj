@@ -187,7 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -195,7 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Company.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
@@ -204,42 +204,42 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CV.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interest.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Job.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobsEntites.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobsEntites.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobsEntites.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobsEntites.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobsEntites.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="TrueJobsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrueJobsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrueJobsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TrueJobsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrueJobsModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_interests.cs">
-      <DependentUpon>TrueJobsModel.tt</DependentUpon>
+      <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +265,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="JobsEntites.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JobsEntites.edmx</DependentUpon>
+      <LastGenOutput>JobsEntites.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="JobsEntites.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JobsEntites.edmx</DependentUpon>
+      <LastGenOutput>JobsEntites.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -279,6 +289,13 @@
     <Content Include="Content\css\ionicons\fonts\ionicons.eot" />
     <Content Include="Content\css\ionicons\fonts\ionicons.ttf" />
     <Content Include="Content\css\ionicons\fonts\ionicons.woff" />
+    <EntityDeploy Include="JobsEntites.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>JobsEntites.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="JobsEntites.edmx.diagram">
+      <DependentUpon>JobsEntites.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\counterup.min.js" />
     <Content Include="Scripts\easing.min.js" />
@@ -302,16 +319,6 @@
     <Content Include="Scripts\superfish.min.js" />
     <Content Include="Scripts\waypoints.min.js" />
     <Content Include="Scripts\wow.min.js" />
-    <Content Include="TrueJobsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TrueJobsModel.edmx</DependentUpon>
-      <LastGenOutput>TrueJobsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="TrueJobsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TrueJobsModel.edmx</DependentUpon>
-      <LastGenOutput>TrueJobsModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -346,13 +353,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <EntityDeploy Include="TrueJobsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TrueJobsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="TrueJobsModel.edmx.diagram">
-      <DependentUpon>TrueJobsModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
@@ -369,7 +369,10 @@
     <Content Include="Views\Interests\Edit.cshtml" />
     <Content Include="Views\Interests\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\imgpoze\" />
+    <Folder Include="App_Data\uploads\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

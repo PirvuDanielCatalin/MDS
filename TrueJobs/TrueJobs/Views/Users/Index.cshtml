@@ -27,12 +27,17 @@
         <th>
             @Html.DisplayNameFor(model => model.Photo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Experience)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.County)
+        </th>
+
         <th></th>
     </tr>
 
@@ -53,16 +58,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.Photo)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Experience)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.User_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.User_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.User_ID })
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.County)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.User_ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.User_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.User_ID })
         </td>
     </tr>
 }

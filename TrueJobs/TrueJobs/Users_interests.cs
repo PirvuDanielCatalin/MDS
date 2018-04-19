@@ -16,11 +16,9 @@ namespace TrueJobs
     {
         public int Users_interests_ID { get; set; }
         public Nullable<int> User_ID { get; set; }
-        public Nullable<int> Job_ID { get; set; }
         public Nullable<int> Interest_ID { get; set; }
     
         public virtual Interest Interest { get; set; }
-        public virtual Job Job { get; set; }
         public virtual User User { get; set; }
     }
 }

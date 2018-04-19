@@ -13,10 +13,10 @@ namespace TrueJobs
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JobsEntities : DbContext
+    public partial class JobsEntities2 : DbContext
     {
-        public JobsEntities()
-            : base("name=JobsEntities")
+        public JobsEntities2()
+            : base("name=JobsEntities2")
         {
         }
     

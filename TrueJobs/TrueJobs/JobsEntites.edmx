@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="JobsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JobsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="Application_ID" />
@@ -20,8 +20,10 @@
           <Property Name="Company_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Email" Type="nchar" MaxLength="300" />
-          <Property Name="Location" Type="nchar" MaxLength="300" />
           <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="County" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CV">
           <Key>
@@ -51,6 +53,8 @@
           <Property Name="Interest" Type="nvarchar(max)" />
           <Property Name="Experience" Type="int" />
           <Property Name="Company_ID" Type="int" />
+          <Property Name="Interest_ID" Type="int" />
+          <Property Name="Attributes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -62,8 +66,9 @@
           <Property Name="Email" Type="nchar" MaxLength="255" />
           <Property Name="Phone" Type="int" />
           <Property Name="Photo" Type="nvarchar(max)" />
-          <Property Name="Location" Type="nvarchar" MaxLength="200" />
           <Property Name="Experience" Type="int" />
+          <Property Name="County" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users_interests">
           <Key>
@@ -71,7 +76,6 @@
           </Key>
           <Property Name="Users_interests_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_ID" Type="int" />
-          <Property Name="Job_ID" Type="int" />
           <Property Name="Interest_ID" Type="int" />
         </EntityType>
         <Association Name="FK_Applications_Jobs">
@@ -110,6 +114,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Interests_Interests">
+          <End Role="Interests" Type="Self.Interests" Multiplicity="1" />
+          <End Role="Interests1" Type="Self.Interests" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Interest_ID" />
+            </Principal>
+            <Dependent Role="Interests1">
+              <PropertyRef Name="Interest_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Jobs_Companies">
           <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
           <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
@@ -122,6 +138,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Jobs_Interests">
+          <End Role="Interests" Type="Self.Interests" Multiplicity="0..1" />
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Interest_ID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="Interest_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_interests_Interests">
           <End Role="Interests" Type="Self.Interests" Multiplicity="0..1" />
           <End Role="Users_interests" Type="Self.Users_interests" Multiplicity="*" />
@@ -131,18 +159,6 @@
             </Principal>
             <Dependent Role="Users_interests">
               <PropertyRef Name="Interest_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_interests_Jobs">
-          <End Role="Jobs" Type="Self.Jobs" Multiplicity="0..1" />
-          <End Role="Users_interests" Type="Self.Users_interests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Jobs">
-              <PropertyRef Name="Job_ID" />
-            </Principal>
-            <Dependent Role="Users_interests">
-              <PropertyRef Name="Job_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -178,16 +194,20 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="CV" EntitySet="CV" />
           </AssociationSet>
+          <AssociationSet Name="FK_Interests_Interests" Association="Self.FK_Interests_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Interests1" EntitySet="Interests" />
+          </AssociationSet>
           <AssociationSet Name="FK_Jobs_Companies" Association="Self.FK_Jobs_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Jobs" EntitySet="Jobs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Interests" Association="Self.FK_Jobs_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_interests_Interests" Association="Self.FK_Users_interests_Interests">
             <End Role="Interests" EntitySet="Interests" />
-            <End Role="Users_interests" EntitySet="Users_interests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_interests_Jobs" Association="Self.FK_Users_interests_Jobs">
-            <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Users_interests" EntitySet="Users_interests" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_interests_Users" Association="Self.FK_Users_interests_Users">
@@ -195,7 +215,8 @@
             <End Role="Users_interests" EntitySet="Users_interests" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JobsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -216,9 +237,11 @@
           <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Jobs" Relationship="Self.FK_Jobs_Companies" FromRole="Companies" ToRole="Jobs" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Jobs_Companies" FromRole="Companies" ToRole="Jobs" />
         </EntityType>
         <EntityType Name="CV">
           <Key>
@@ -235,6 +258,9 @@
           </Key>
           <Property Name="Interest_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Interests1" Relationship="Self.FK_Interests_Interests" FromRole="Interests" ToRole="Interests1" />
+          <NavigationProperty Name="Interest1" Relationship="Self.FK_Interests_Interests" FromRole="Interests1" ToRole="Interests" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Jobs_Interests" FromRole="Interests" ToRole="Jobs" />
           <NavigationProperty Name="Users_interests" Relationship="Self.FK_Users_interests_Interests" FromRole="Interests" ToRole="Users_interests" />
         </EntityType>
         <EntityType Name="Job">
@@ -250,9 +276,11 @@
           <Property Name="Interest" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Experience" Type="Int32" />
           <Property Name="Company_ID" Type="Int32" />
+          <Property Name="Interest_ID" Type="Int32" />
+          <Property Name="Attributes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Jobs" FromRole="Jobs" ToRole="Applications" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Jobs_Companies" FromRole="Jobs" ToRole="Companies" />
-          <NavigationProperty Name="Users_interests" Relationship="Self.FK_Users_interests_Jobs" FromRole="Jobs" ToRole="Users_interests" />
+          <NavigationProperty Name="Interest1" Relationship="Self.FK_Jobs_Interests" FromRole="Jobs" ToRole="Interests" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -264,8 +292,9 @@
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="Phone" Type="Int32" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Experience" Type="Int32" />
+          <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Users" FromRole="Users" ToRole="Applications" />
           <NavigationProperty Name="CVs" Relationship="Self.FK_CV_Users" FromRole="Users" ToRole="CV" />
           <NavigationProperty Name="Users_interests" Relationship="Self.FK_Users_interests_Users" FromRole="Users" ToRole="Users_interests" />
@@ -276,10 +305,8 @@
           </Key>
           <Property Name="Users_interests_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_ID" Type="Int32" />
-          <Property Name="Job_ID" Type="Int32" />
           <Property Name="Interest_ID" Type="Int32" />
           <NavigationProperty Name="Interest" Relationship="Self.FK_Users_interests_Interests" FromRole="Users_interests" ToRole="Interests" />
-          <NavigationProperty Name="Job" Relationship="Self.FK_Users_interests_Jobs" FromRole="Users_interests" ToRole="Jobs" />
           <NavigationProperty Name="User" Relationship="Self.FK_Users_interests_Users" FromRole="Users_interests" ToRole="Users" />
         </EntityType>
         <Association Name="FK_Applications_Jobs">
@@ -330,6 +357,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Interests_Interests">
+          <End Role="Interests" Type="Self.Interest" Multiplicity="1" />
+          <End Role="Interests1" Type="Self.Interest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Interest_ID" />
+            </Principal>
+            <Dependent Role="Interests1">
+              <PropertyRef Name="Interest_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Interests">
+          <End Role="Interests" Type="Self.Interest" Multiplicity="0..1" />
+          <End Role="Jobs" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interests">
+              <PropertyRef Name="Interest_ID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="Interest_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_interests_Interests">
           <End Role="Interests" Type="Self.Interest" Multiplicity="0..1" />
           <End Role="Users_interests" Type="Self.Users_interests" Multiplicity="*" />
@@ -339,18 +390,6 @@
             </Principal>
             <Dependent Role="Users_interests">
               <PropertyRef Name="Interest_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_interests_Jobs">
-          <End Role="Jobs" Type="Self.Job" Multiplicity="0..1" />
-          <End Role="Users_interests" Type="Self.Users_interests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Jobs">
-              <PropertyRef Name="Job_ID" />
-            </Principal>
-            <Dependent Role="Users_interests">
-              <PropertyRef Name="Job_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -366,7 +405,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JobsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="JobsEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applications" EntityType="Self.Application" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="CVs" EntityType="Self.CV" />
@@ -390,12 +429,16 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="CV" EntitySet="CVs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Interests_Interests" Association="Self.FK_Interests_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Interests1" EntitySet="Interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Interests" Association="Self.FK_Jobs_Interests">
+            <End Role="Interests" EntitySet="Interests" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_interests_Interests" Association="Self.FK_Users_interests_Interests">
             <End Role="Interests" EntitySet="Interests" />
-            <End Role="Users_interests" EntitySet="Users_interests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_interests_Jobs" Association="Self.FK_Users_interests_Jobs">
-            <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Users_interests" EntitySet="Users_interests" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_interests_Users" Association="Self.FK_Users_interests_Users">
@@ -408,7 +451,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JobsModelStoreContainer" CdmEntityContainer="JobsEntities">
+        <EntityContainerMapping StorageEntityContainer="JobsModelStoreContainer" CdmEntityContainer="JobsEntities2">
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="JobsModel.Application">
               <MappingFragment StoreEntitySet="Applications">
@@ -421,11 +464,13 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="JobsModel.Company">
               <MappingFragment StoreEntitySet="Companies">
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -458,6 +503,8 @@
                 <ScalarProperty Name="Interest" ColumnName="Interest" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Interest_ID" ColumnName="Interest_ID" />
+                <ScalarProperty Name="Attributes" ColumnName="Attributes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -470,8 +517,9 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="City" ColumnName="City" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -480,7 +528,6 @@
               <MappingFragment StoreEntitySet="Users_interests">
                 <ScalarProperty Name="Users_interests_ID" ColumnName="Users_interests_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
-                <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
                 <ScalarProperty Name="Interest_ID" ColumnName="Interest_ID" />
               </MappingFragment>
             </EntityTypeMapping>
