@@ -6,6 +6,14 @@
         @Html.AntiForgeryToken()
 
 
+       
+        
+
+          
+
+           
+        
+
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active" style="margin-left:20px"><a href="@Url.Action("Index", "Home")#intro">Acasa</a></li>
@@ -13,7 +21,8 @@
                 <li><a href="@Url.Action("Index", "Home")#facts">Statistici</a></li>
                 <li><a href="@Url.Action("Index", "Home")#contact">Contact</a></li>
                 <li>
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @*@Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users",routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
                 </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 @*<li><a href="@Url.Action("Register", "Account")">Cont nou</a></li>

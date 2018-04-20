@@ -17,7 +17,8 @@ namespace TrueJobs.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
+        private JobsEntities2 db = new JobsEntities2();
+
         public AccountController()
         {
         }
@@ -405,6 +406,10 @@ namespace TrueJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+     
+            //var userEmail = User.Identity.GetUserName();
+            //User user = db.Users.Find(userEmail);
+            //ViewBag.User_ID = user.User_ID;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

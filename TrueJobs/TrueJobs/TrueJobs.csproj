@@ -247,9 +247,11 @@
     <Content Include="App_Data\aspnet-TrueJobs-20180414052157_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\AdminLTE.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\font-awesome\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\ionicons\css\ionicons.min.css" />
     <Content Include="Content\css\ionicons\fonts\ionicons.svg" />
     <Content Include="Content\css\lightbox.min.css" />
@@ -296,6 +298,10 @@
     <Content Include="JobsEntites.edmx.diagram">
       <DependentUpon>JobsEntites.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\css\font-awesome\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\font-awesome\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\css\font-awesome\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\counterup.min.js" />
     <Content Include="Scripts\easing.min.js" />
@@ -370,10 +376,11 @@
     <Content Include="Views\Interests\Index.cshtml" />
     <Content Include="Views\Users\Create2.cshtml" />
     <Content Include="Views\Users\UserInterest.cshtml" />
+    <Content Include="Views\Users\UserInterest2.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\imgpoze\" />
     <Folder Include="App_Data\uploads\" />
+    <Folder Include="imgpoze\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

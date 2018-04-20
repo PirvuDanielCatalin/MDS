@@ -22,7 +22,7 @@
 </head>
 <script src="~/Scripts/jquery.min.js"></script>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body>
     @*    <div class="wrapper">
 
         <div class="content-wrapper">
@@ -52,7 +52,7 @@
 
                             <br />
                             <br />
-                           
+
                             <br />
                             <br />
                             @Html.ValidationSummary(true)
@@ -93,8 +93,9 @@
                             <br />
                             <br />
                             <div class="form-group">
-                                <button type="button" class="btn btn-default " style="color:white" onclick="location.href='@Url.Action("Details", "Users", new { id = Model.User_ID })'" data-dismiss="modal">Finish</button>
+                                <button type="button" class="btn btn-default " style="color:white" onclick="location.href='@Url.Action("Details", "Users", new { email = Model.Email.TrimEnd() })'" data-dismiss="modal">Finish</button>
                             </div>
+
                         </div>
                     </div>
                     <div class="col-lg-2"></div>

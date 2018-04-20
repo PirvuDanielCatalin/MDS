@@ -22,13 +22,14 @@ namespace TrueJobs.Controllers
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(/*int? id,*/ string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            //User user = db.Users.Find(id);
+            User user = db.Users.SingleOrDefault(d => d.Email == email);
             if (user == null)
             {
                 return HttpNotFound();
@@ -45,6 +46,7 @@ namespace TrueJobs.Controllers
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(HttpPostedFileBase file2, CV cv, IEnumerable<HttpPostedFileBase> files, User user)
@@ -55,7 +57,7 @@ namespace TrueJobs.Controllers
                 // extract only the filename
                 var fileName = Path.GetFileNameWithoutExtension(file2.FileName) + " _ " + DateTime.Now.ToString("ddHmmss") + Path.GetExtension(file2.FileName);
                
-                var path = Path.Combine(Server.MapPath("~/App_Data/imgpoze"), fileName);
+                var path = Path.Combine(Server.MapPath("~/imgpoze"), fileName);
                 user.Photo = fileName;
 
                 file2.SaveAs(path);
@@ -193,31 +195,34 @@ namespace TrueJobs.Controllers
             IEnumerable<Interest> model = from p in db.Interests
                                      join pe in db.Users_interests on p.Interest_ID equals pe.Interest_ID
                                      where pe.User_ID == user.User_ID
-                                     select p;
-            //IEnumerable<Competence_Contractors> model = from p in db.Competence_Contractors
-            //                                        join pe in db.CompetencesC_types on p.Competence_ID equals pe.Competence_ID
-            //                                        where p.Contractor_ID == contractor.Contractor_ID
-            //                                        select p;
-            //var proiect = new Enumerable<Proiect>();
-            //  return View(model);
+                                     select p;           
             return View(model);
 
         }
         [ActionName("userinterest2")]
-        public ActionResult UserInterest2(int id)
+        public ActionResult UserInterest2(string email)
         {
-            User user = db.Users.Find(id);
+            User user = db.Users.SingleOrDefault(d=>d.Email==email);
             IEnumerable<Interest> model = from p in db.Interests
                                           join pe in db.Users_interests on p.Interest_ID equals pe.Interest_ID
                                           where pe.User_ID == user.User_ID
                                           select p;
-            //IEnumerable<Competence_Contractors> model = from p in db.Competence_Contractors
-            //                                        join pe in db.CompetencesC_types on p.Competence_ID equals pe.Competence_ID
-            //                                        where p.Contractor_ID == contractor.Contractor_ID
-            //                                        select p;
-            //var proiect = new Enumerable<Proiect>();
-            //  return View(model);
             return View(model);
+        }
+
+
+        public ActionResult Downloads(int id = 0)
+        {
+            var fileToRetrieve = db.CVs.Where(f => f.User_ID == id);
+            return View(fileToRetrieve);
+        }
+
+        public FileResult Download(string name)
+        {
+
+            var path = "~/App_Data/uploads/" + name;
+            return File(path, "application/force-download", Path.GetFileName(path));
+
         }
 
         // GET: Users/Edit/5
@@ -252,13 +257,13 @@ namespace TrueJobs.Controllers
         }
 
         // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(/*int? id*/ string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = db.Users.SingleOrDefault(d => d.Email == email);
             if (user == null)
             {
                 return HttpNotFound();
@@ -269,12 +274,12 @@ namespace TrueJobs.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(/*int id*/ string email)
         {
-            User user = db.Users.Find(id);
-          
-            db.CVs.RemoveRange(db.CVs.Where(c => c.User_ID == id));
-            db.Users_interests.RemoveRange(db.Users_interests.Where(c=>c.User_ID == id));
+            User user = db.Users.SingleOrDefault(d => d.Email == email);
+
+            db.CVs.RemoveRange(db.CVs.Where(c => c.User_ID == user.User_ID));
+            db.Users_interests.RemoveRange(db.Users_interests.Where(c=>c.User_ID == user.User_ID));
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -70,8 +70,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.User_ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.User_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.User_ID })
+            @Html.ActionLink("Details", "Details", new { email = item.Email.TrimEnd() }) |
+            @Html.ActionLink("Delete", "Delete", new { email = item.Email.TrimEnd() })
         </td>
     </tr>
 }
