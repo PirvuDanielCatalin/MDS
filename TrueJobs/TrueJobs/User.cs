@@ -26,7 +26,7 @@ namespace TrueJobs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public Nullable<int> Phone { get; set; }
+        public string Phone { get; set; }
         public string Photo { get; set; }
         public Nullable<int> Experience { get; set; }
         public string County { get; set; }

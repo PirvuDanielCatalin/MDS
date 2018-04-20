@@ -87,10 +87,137 @@ namespace TrueJobs.Controllers
                     }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Create2", new { id = user.User_ID});
             }
 
             return View(user);
+        }
+
+
+        public ActionResult Create2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Tag_ID = new SelectList((from p in db.Interests
+                                             select new
+                                             {
+                                                 Tag_ID1 = p.Interest_ID,
+                                                 Tag_name1 = p.Name
+                                             }), "Tag_ID1", "Tag_name1");
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2(User user, Users_interests user_interest)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Success");
+            }
+            ViewBag.Tag_ID = new SelectList((from p in db.Interests
+                                             select new
+                                             {
+                                                 Tag_ID1 = p.Interest_ID,
+                                                 Tag_name1 = p.Name
+                                             }), "Tag_ID1", "Tag_name1");
+            return View(user);
+        }
+
+
+        public JsonResult AddTag(int id, int elem)
+        {
+         
+            var tag = new Users_interests();
+
+            //set student name
+
+            tag.User_ID = elem;
+            tag.Interest_ID = id;
+
+
+            //create DBContext object
+            //Add Student object into Students DBset
+            db.Users_interests.Add(tag);
+
+          
+            db.SaveChanges();
+
+
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+
+        }
+        //public JsonResult DeleteTag(int id, int elem)
+        //{
+        //    Articles_tags tagToDelete = new Articles_tags();
+        //    tagToDelete.ID_Art = elem;
+        //    tagToDelete.Tag_ID = id;
+        //    db.Entry(tagToDelete).State = System.Data.Entity.EntityState.Deleted;
+        //    db.SaveChanges();
+
+        //    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        //}
+        public JsonResult DeleteTag(int id)
+        {
+            Interest tag = db.Interests.Find(id);
+            Users_interests tagToDelete = db.Users_interests.Where(a => a.Interest_ID == tag.Interest_ID).FirstOrDefault();
+            db.Users_interests.Remove(tagToDelete);
+            db.SaveChanges();
+
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [ActionName("userinterest")]
+        public ActionResult UserInterest(int id)
+        {
+
+
+            User user = db.Users.Find(id);
+            IEnumerable<Interest> model = from p in db.Interests
+                                     join pe in db.Users_interests on p.Interest_ID equals pe.Interest_ID
+                                     where pe.User_ID == user.User_ID
+                                     select p;
+            //IEnumerable<Competence_Contractors> model = from p in db.Competence_Contractors
+            //                                        join pe in db.CompetencesC_types on p.Competence_ID equals pe.Competence_ID
+            //                                        where p.Contractor_ID == contractor.Contractor_ID
+            //                                        select p;
+            //var proiect = new Enumerable<Proiect>();
+            //  return View(model);
+            return View(model);
+
+        }
+        [ActionName("userinterest2")]
+        public ActionResult UserInterest2(int id)
+        {
+            User user = db.Users.Find(id);
+            IEnumerable<Interest> model = from p in db.Interests
+                                          join pe in db.Users_interests on p.Interest_ID equals pe.Interest_ID
+                                          where pe.User_ID == user.User_ID
+                                          select p;
+            //IEnumerable<Competence_Contractors> model = from p in db.Competence_Contractors
+            //                                        join pe in db.CompetencesC_types on p.Competence_ID equals pe.Competence_ID
+            //                                        where p.Contractor_ID == contractor.Contractor_ID
+            //                                        select p;
+            //var proiect = new Enumerable<Proiect>();
+            //  return View(model);
+            return View(model);
         }
 
         // GET: Users/Edit/5
@@ -145,8 +272,10 @@ namespace TrueJobs.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
-            db.Users.Remove(user);
+          
             db.CVs.RemoveRange(db.CVs.Where(c => c.User_ID == id));
+            db.Users_interests.RemoveRange(db.Users_interests.Where(c=>c.User_ID == id));
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

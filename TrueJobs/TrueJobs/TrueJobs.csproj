@@ -368,6 +368,8 @@
     <Content Include="Views\Interests\Details.cshtml" />
     <Content Include="Views\Interests\Edit.cshtml" />
     <Content Include="Views\Interests\Index.cshtml" />
+    <Content Include="Views\Users\Create2.cshtml" />
+    <Content Include="Views\Users\UserInterest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\imgpoze\" />

@@ -30,7 +30,7 @@ namespace TrueJobs
         public virtual DbSet<CV> CVs { get; set; }
         public virtual DbSet<Interest> Interests { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Users_interests> Users_interests { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
