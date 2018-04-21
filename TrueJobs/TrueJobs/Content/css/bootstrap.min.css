@@ -2592,6 +2592,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     display: inline-block;
     font-weight: 400;
     text-align: center;
+    background-color: #28a745;
     white-space: nowrap;
     vertical-align: middle;
     -webkit-user-select: none;
@@ -2638,14 +2639,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #1aff1a;
-    border-color: #1aff1a;
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
     .btn-primary:hover {
         color: #fff;
-        background-color: #00cc00;
-        border-color: #00cc00
+        background-color: #228B22;
+        border-color: #228B22;
     }
 
 .btn-primary.focus,
@@ -2656,7 +2657,7 @@ fieldset:disabled a.btn {
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
-    background-color: #007bff;
+    background-color:#228B22;
     border-color: #007bff
 }
 
