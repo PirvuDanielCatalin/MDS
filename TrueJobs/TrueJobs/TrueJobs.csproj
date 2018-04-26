@@ -248,6 +248,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\AdminLTE.min.css" />
+    <Content Include="Content\css\Admin\bootstrap.min.js" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />

@@ -68,7 +68,7 @@ namespace TrueJobs.Controllers
 
             if (ModelState.IsValid)
             {
-                user.Email = User.Identity.Name;
+                user.Email = User.Identity.Name.TrimEnd();
                 db.Users.Add(user);
                 db.SaveChanges();
 

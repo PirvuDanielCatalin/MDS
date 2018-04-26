@@ -5,53 +5,155 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <style>
+        select {
+            width: 100%;
+        }
+    </style>
+    <link href="~/Content/css/AdminLTE.min.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 142, 99, 0.1), rgba(0, 0, 0, 0.1)), url('../../Content/img_biz/1.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        h2 {
+            color: black;
+            text-align: center
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Company</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+</head>
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Alba",
+        Selected = true
+        //Value = "Exemplo1"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Arad",
+        //Value = "Exemplo2",
+
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Arges",
+        // Value = "Exemplo3"
+    });
+
+}
+
+
+@{
+    List<SelectListItem> listItems2 = new List<SelectListItem>();
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Bacau",
+        Selected = true
+        //Value = "Bacau"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Bucuresti",
+        // Value = "Bucuresti",
+
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Orastie",
+        //Value = "Orastie"
+    });
+
+}
+
+<main id="main" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <h2>Creaza profil</h2>
+                <br />
+                <br />
+
+                @using (Html.BeginForm("Create", "Companies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Company</h4>
+                    <hr />
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+           
+
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="color:black">Judet</div>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.County, listItems, "-- Selecteaza Judetul --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="color:black">Oras</div>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.City, listItems2, "-- Selecteaza Orasul --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="color:black">Telefon:</div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="color:black">Poza</div>
+                        <div class="col-lg-9">
+                            <input type="file" name="file2" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                }
+
+                @*<div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                *@
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</main>

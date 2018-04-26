@@ -129,14 +129,14 @@
                     <div class="form-group">
                         <div class="control-label col-md-2" style="color:black">Judet</div>
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.County, listItems, "-- Selecteaza Judetul --")
-                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.County, listItems, "-- Selecteaza Judetul --",new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="control-label col-md-2" style="color:black">Oras</div>
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.City, listItems2, "-- Selecteaza Orasul --")
+                            @Html.DropDownListFor(model => model.City, listItems2, "-- Selecteaza Orasul --", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                         </div>
                     </div>

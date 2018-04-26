@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,13 +22,14 @@ namespace TrueJobs.Controllers
         }
 
         // GET: Companies/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(/*int? id*/string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
+            
+            Company company = db.Companies.SingleOrDefault(d => d.Email == email);
             if (company == null)
             {
                 return HttpNotFound();
@@ -44,15 +46,29 @@ namespace TrueJobs.Controllers
         // POST: Companies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "Company_ID,Name,Email,Location")] */Company company)
+        public ActionResult Create( Company company, HttpPostedFileBase file2)
         {
+            if (file2 != null && file2.ContentLength > 0)
+            {
+                // extract only the filename
+                var fileName = Path.GetFileNameWithoutExtension(file2.FileName) + " _ " + DateTime.Now.ToString("ddHmmss") + Path.GetExtension(file2.FileName);
+                var path = Path.Combine(Server.MapPath("~/imgpoze"), fileName);
+                company.Photo = fileName;
+                file2.SaveAs(path);
+
+
+
+            }
+
             if (ModelState.IsValid)
             {
+                company.Email = User.Identity.Name.TrimEnd();
                 db.Companies.Add(company);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { email = company.Email });
             }
 
             return View(company);
@@ -90,13 +106,13 @@ namespace TrueJobs.Controllers
         }
 
         // GET: Companies/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(/*int? id*/string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
+            Company company = db.Companies.SingleOrDefault(d => d.Email == email);
             if (company == null)
             {
                 return HttpNotFound();
