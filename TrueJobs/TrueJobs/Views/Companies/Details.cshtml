@@ -22,11 +22,13 @@
 </head>
 
 
-@if (User.Identity.IsAuthenticated &&  User.IsInRole("companie"))
-{
+@*@if (User.Identity.IsAuthenticated && User.IsInRole("companie"))
+{*@
 <main id="main" style="margin-top:100px">
 
-
+    <br />
+    <br />
+    <br />
 
 
     <section class="content">
@@ -84,7 +86,7 @@
                     <ul class="nav nav-tabs">
                         <li class=""><a href="#activity" data-toggle="tab">Joburi</a></li>
                         <li><a href="#timeline" data-toggle="tab">Aplicanti</a></li>
-                       
+
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
@@ -95,10 +97,9 @@
                         <div class="tab-pane" id="timeline">
                             <!-- The timeline -->
                             <p>ceva</p>
-                          
+
                         </div>
                         <!-- /.tab-pane -->
-                     
                         <!-- /.tab-pane -->
                     </div>
                     <!-- /.tab-content -->
@@ -110,6 +111,10 @@
     </section>
     <script src="~/Content/css/Admin/bootstrap.min.js"></script>
 
+
+    <br />
+    <br />
+    <br />
 </main>
 
-}
+@*}*@

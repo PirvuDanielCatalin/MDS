@@ -24,21 +24,26 @@
 
                 @*@Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users",routeValues: null, htmlAttributes: new { title = "Manage" })*@
 
-                @if (User.IsInRole("candidat"))
+                @*@if (ViewContext.HttpContext.User.IsInRole("candidat"))
                 {
                     <li>
                         @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
                     </li>
-                }
-                @if (User.IsInRole("companie"))
-                {
-                    <li>
-                        @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Companies", new { email = User.Identity.GetUserName() }, null)
-                    </li>
-                }
+                }*@
+                @*@if (User.IsInRole("companie"))
+                    {
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Companies", new { email = User.Identity.GetUserName() }, null)
+                        </li>
+                    }*@
                 @*<li>
                         @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Companies", new { email = User.Identity.GetUserName() }, null)
                     </li>*@
+                <li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
+                </li>
+
+
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 @*<li><a href="@Url.Action("Register", "Account")">Cont nou</a></li>
                     <li><a href="@Url.Action("Login", "Account")">Intra in cont</a></li>*@
