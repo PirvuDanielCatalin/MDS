@@ -78,6 +78,19 @@
           <Property Name="User_ID" Type="int" />
           <Property Name="Interest_ID" Type="int" />
         </EntityType>
+        <EntityType Name="WriteCV">
+          <Key>
+            <PropertyRef Name="WritecvID" />
+          </Key>
+          <Property Name="WritecvID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" />
+          <Property Name="PreviousWork" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Skills" Type="nvarchar(max)" />
+          <Property Name="Studies" Type="nvarchar(max)" />
+          <Property Name="Languages" Type="nvarchar(max)" />
+          <Property Name="Hobbies" Type="nvarchar(max)" />
+        </EntityType>
         <Association Name="FK_Applications_Jobs">
           <End Role="Jobs" Type="Self.Jobs" Multiplicity="0..1" />
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
@@ -174,6 +187,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WriteCV_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="WriteCV" Type="Self.WriteCV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="WriteCV">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="JobsModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
@@ -182,6 +207,7 @@
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users_interests" EntityType="Self.Users_interests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WriteCV" EntityType="Self.WriteCV" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Applications_Jobs" Association="Self.FK_Applications_Jobs">
             <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Applications" EntitySet="Applications" />
@@ -213,6 +239,10 @@
           <AssociationSet Name="FK_Users_interests_Users" Association="Self.FK_Users_interests_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Users_interests" EntitySet="Users_interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WriteCV_Users" Association="Self.FK_WriteCV_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WriteCV" EntitySet="WriteCV" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -391,6 +421,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Users_interests" EntitySet="Users_interests" />
           </AssociationSet>
+          <EntitySet Name="WriteCVs" EntityType="JobsModel.WriteCV" />
+          <AssociationSet Name="FK_WriteCV_Users" Association="JobsModel.FK_WriteCV_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WriteCV" EntitySet="WriteCVs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -408,6 +443,7 @@
           <NavigationProperty Name="Applications" Relationship="JobsModel.FK_Applications_Users" FromRole="User" ToRole="Application" />
           <NavigationProperty Name="CVs" Relationship="JobsModel.FK_CV_Users" FromRole="User" ToRole="CV" />
           <NavigationProperty Name="Users_interests" Relationship="JobsModel.FK_Users_interests_Users" FromRole="User" ToRole="Users_interests" />
+          <NavigationProperty Name="WriteCVs" Relationship="JobsModel.FK_WriteCV_Users" FromRole="User" ToRole="WriteCV" />
         </EntityType>
         <Association Name="FK_Applications_Users">
           <End Type="JobsModel.User" Role="User" Multiplicity="0..1" />
@@ -441,6 +477,32 @@
               <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Users_interests">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WriteCV">
+          <Key>
+            <PropertyRef Name="WritecvID" />
+          </Key>
+          <Property Name="WritecvID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" />
+          <Property Name="PreviousWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Studies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hobbies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="JobsModel.FK_WriteCV_Users" FromRole="WriteCV" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_WriteCV_Users">
+          <End Type="JobsModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="JobsModel.WriteCV" Role="WriteCV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="WriteCV">
               <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -528,6 +590,20 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WriteCVs">
+            <EntityTypeMapping TypeName="JobsModel.WriteCV">
+              <MappingFragment StoreEntitySet="WriteCV">
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
+                <ScalarProperty Name="Studies" ColumnName="Studies" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PreviousWork" ColumnName="PreviousWork" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="WritecvID" ColumnName="WritecvID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -203,6 +203,7 @@
     <Compile Include="Controllers\InterestsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WriteCVsController.cs" />
     <Compile Include="CV.cs">
       <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
@@ -239,6 +240,9 @@
       <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
     <Compile Include="Users_interests.cs">
+      <DependentUpon>JobsEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WriteCV.cs">
       <DependentUpon>JobsEntites.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -379,6 +383,11 @@
     <Content Include="Views\Users\Create2.cshtml" />
     <Content Include="Views\Users\UserInterest.cshtml" />
     <Content Include="Views\Users\UserInterest2.cshtml" />
+    <Content Include="Views\WriteCVs\Create.cshtml" />
+    <Content Include="Views\WriteCVs\Delete.cshtml" />
+    <Content Include="Views\WriteCVs\Details.cshtml" />
+    <Content Include="Views\WriteCVs\Edit.cshtml" />
+    <Content Include="Views\WriteCVs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

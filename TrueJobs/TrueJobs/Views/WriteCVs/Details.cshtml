@@ -1,0 +1,74 @@
+﻿@model TrueJobs.WriteCV
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WriteCV</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PreviousWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreviousWork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skills)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Studies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Studies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Languages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Languages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hobbies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hobbies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WritecvID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

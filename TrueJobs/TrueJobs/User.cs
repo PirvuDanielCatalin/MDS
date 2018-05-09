@@ -20,6 +20,7 @@ namespace TrueJobs
             this.Applications = new HashSet<Application>();
             this.CVs = new HashSet<CV>();
             this.Users_interests = new HashSet<Users_interests>();
+            this.WriteCVs = new HashSet<WriteCV>();
         }
     
         public int User_ID { get; set; }
@@ -38,5 +39,7 @@ namespace TrueJobs
         public virtual ICollection<CV> CVs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users_interests> Users_interests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WriteCV> WriteCVs { get; set; }
     }
 }

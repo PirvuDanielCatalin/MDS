@@ -61,9 +61,6 @@ namespace TrueJobs.Controllers
                 user.Photo = fileName;
 
                 file2.SaveAs(path);
-               
-
-
             }
 
             if (ModelState.IsValid)

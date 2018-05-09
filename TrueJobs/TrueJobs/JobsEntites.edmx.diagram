@@ -20,6 +20,8 @@
         <AssociationConnector Association="JobsModel.FK_Applications_Users" />
         <AssociationConnector Association="JobsModel.FK_CV_Users" />
         <AssociationConnector Association="JobsModel.FK_Users_interests_Users" />
+        <EntityTypeShape EntityType="JobsModel.WriteCV" Width="1.5" PointX="3" PointY="9.5" />
+        <AssociationConnector Association="JobsModel.FK_WriteCV_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
