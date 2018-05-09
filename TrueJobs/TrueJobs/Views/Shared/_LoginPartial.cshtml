@@ -13,7 +13,6 @@
 
 
 
-
         <nav id="nav-menu-container">
             <ul class="nav-menu">
 
@@ -25,11 +24,11 @@
                 @*@Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users",routeValues: null, htmlAttributes: new { title = "Manage" })*@
 
                 @*@if (ViewContext.HttpContext.User.IsInRole("candidat"))
-                {
-                    <li>
-                        @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
-                    </li>
-                }*@
+                    {
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
+                        </li>
+                    }*@
                 @*@if (User.IsInRole("companie"))
                     {
                         <li>
@@ -39,9 +38,18 @@
                 @*<li>
                         @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Companies", new { email = User.Identity.GetUserName() }, null)
                     </li>*@
+
+
+
+                @*<li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Companies", new { email = User.Identity.GetUserName() }, null)
+                    </li>*@
                 <li>
-                        @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Details", "Users", new { email = User.Identity.GetUserName() }, null)
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf('@')) + "!", "Index", "Manage")
                 </li>
+
+
+
 
 
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
