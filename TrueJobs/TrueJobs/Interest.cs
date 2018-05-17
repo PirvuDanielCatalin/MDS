@@ -17,8 +17,8 @@ namespace TrueJobs
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Interest()
         {
-            this.Jobs = new HashSet<Job>();
             this.Users_interests = new HashSet<Users_interests>();
+            this.Jobs = new HashSet<Job>();
         }
     
         public int Interest_ID { get; set; }
@@ -27,8 +27,8 @@ namespace TrueJobs
         public virtual Interest Interests1 { get; set; }
         public virtual Interest Interest1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Job> Jobs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users_interests> Users_interests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

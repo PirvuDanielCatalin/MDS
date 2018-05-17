@@ -18,7 +18,7 @@ namespace TrueJobs
         public Nullable<int> Job_ID { get; set; }
         public Nullable<int> User_ID { get; set; }
     
-        public virtual Job Job { get; set; }
         public virtual User User { get; set; }
+        public virtual Job Job { get; set; }
     }
 }

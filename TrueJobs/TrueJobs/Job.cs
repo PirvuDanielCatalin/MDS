@@ -26,7 +26,6 @@ namespace TrueJobs
         public string Description { get; set; }
         public string Requirements { get; set; }
         public string Type { get; set; }
-        public string Interest { get; set; }
         public Nullable<int> Experience { get; set; }
         public Nullable<int> Company_ID { get; set; }
         public Nullable<int> Interest_ID { get; set; }
@@ -35,6 +34,6 @@ namespace TrueJobs
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
         public virtual Company Company { get; set; }
-        public virtual Interest Interest1 { get; set; }
+        public virtual Interest Interest { get; set; }
     }
 }

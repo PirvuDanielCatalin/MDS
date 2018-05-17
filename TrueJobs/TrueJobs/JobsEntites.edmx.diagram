@@ -9,12 +9,8 @@
         <EntityTypeShape EntityType="JobsModel.Company" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsModel.CV" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsModel.Interest" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobsModel.Job" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="JobsModel.Users_interests" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="JobsModel.FK_Applications_Jobs" ManuallyRouted="false" />
-        <AssociationConnector Association="JobsModel.FK_Jobs_Companies" ManuallyRouted="false" />
         <AssociationConnector Association="JobsModel.FK_Interests_Interests" ManuallyRouted="false" />
-        <AssociationConnector Association="JobsModel.FK_Jobs_Interests" ManuallyRouted="false" />
         <AssociationConnector Association="JobsModel.FK_Users_interests_Interests" ManuallyRouted="false" />
         <EntityTypeShape EntityType="JobsModel.User" Width="1.5" PointX="0.75" PointY="8.125" />
         <AssociationConnector Association="JobsModel.FK_Applications_Users" />
@@ -22,6 +18,10 @@
         <AssociationConnector Association="JobsModel.FK_Users_interests_Users" />
         <EntityTypeShape EntityType="JobsModel.WriteCV" Width="1.5" PointX="3" PointY="9.5" />
         <AssociationConnector Association="JobsModel.FK_WriteCV_Users" />
+        <EntityTypeShape EntityType="JobsModel.Job" Width="1.5" PointX="3" PointY="2.25" />
+        <AssociationConnector Association="JobsModel.FK_Applications_Jobs" />
+        <AssociationConnector Association="JobsModel.FK_Jobs_Companies" />
+        <AssociationConnector Association="JobsModel.FK_Jobs_Interests" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
