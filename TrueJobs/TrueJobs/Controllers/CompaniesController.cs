@@ -18,6 +18,8 @@ namespace TrueJobs.Controllers
         // GET: Companies
         public ActionResult Index()
         {
+
+
             return View(db.Companies.ToList());
         }
 
@@ -30,6 +32,8 @@ namespace TrueJobs.Controllers
             }
             
             Company company = db.Companies.SingleOrDefault(d => d.Email == email);
+            ViewBag.compId = company.Company_ID;
+
             if (company == null)
             {
                 return HttpNotFound();

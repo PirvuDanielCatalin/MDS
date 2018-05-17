@@ -30,6 +30,7 @@ namespace TrueJobs.Controllers
             }
             //User user = db.Users.Find(id);
             User user = db.Users.SingleOrDefault(d => d.Email == email);
+            ViewBag.userID = user.User_ID;
             if (user == null)
             {
                 return HttpNotFound();

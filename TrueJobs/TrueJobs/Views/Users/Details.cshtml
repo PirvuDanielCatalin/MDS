@@ -52,18 +52,19 @@
 
                                 <h3 class="profile-username text-center">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
 
+                                <a href="@Url.Action("Edit", "Users", new { id = ViewBag.userID })" class="btn btn-default"><b>Edit profile</b></a>
 
 
 
                                 @*<ul class="list-group list-group-unbordered">
-                                        <li class="list-group-item">
-                                            <b>Created by</b> <p class="pull-right">@Html.DisplayFor(model => model.Author)</p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Date</b> <p class="pull-right">@Html.DisplayFor(model => model.Date)</p>
-                                        </li>
+            <li class="list-group-item">
+                <b>Created by</b> <p class="pull-right">@Html.DisplayFor(model => model.Author)</p>
+            </li>
+            <li class="list-group-item">
+                <b>Date</b> <p class="pull-right">@Html.DisplayFor(model => model.Date)</p>
+            </li>
 
-                                    </ul>*@
+        </ul>*@
                             </div>
                             <!-- /.box-body -->
                         </div>

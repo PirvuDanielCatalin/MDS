@@ -42,6 +42,8 @@
                         <img class="profile-user-img img-responsive img-circle" src="~/imgpoze/@Model.Photo" alt="User picture">
 
                         <h3 class="profile-username text-center">@Html.DisplayFor(model => model.Name)</h3>
+
+                        <a href="@Url.Action("Edit", "Companies", new { id = ViewBag.compId })" class="btn btn-default"><b>Edit profile</b></a>
                     </div>
                     <br /><br />
                 </div>
