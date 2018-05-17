@@ -57,47 +57,23 @@
 
 
 
-
+                <p>@ViewBag.rol</p>
 
                 <dl class="dl-horizontal">
-                    @*<dt><h3>Password:</h3></dt>
-                                            <dd>
-                                                [
-                                                @if (Model.HasPassword)
-                                {
-                                        @Html.ActionLink("Change your password", "ChangePassword")
-                        }
-                        else
-                        {
-                                        @Html.ActionLink("Create", "SetPassword")
-                        }
-                                                ]
-                                            </dd>*@
-                    @*<dt>External Logins:</dt>
-                        <dd>
-                            @Model.Logins.Count [
-                            @Html.ActionLink("Manage", "ManageLogins") ]
-                        </dd>*@
-                    @*<dt>Two-Factor Authentication:</dt>
-                        <dd>
-                            <p>
-                                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                                for details on setting up this ASP.NET application to support two-factor authentication.
-                            </p>
 
-                        </dd>*@
-
-                    @if (User.IsInRole("companie"))
+                    @if (ViewBag.rol == "companie")
                     {
+                        
                         <button type="button" class="btn btn-default " style="color:white" onclick="location.href='@Url.Action("Details", "Companies", new { email = User.Identity.Name })'" data-dismiss="modal">Go to your profile</button>
                     }
-                    else if (User.IsInRole("candidat"))
+                    else if (ViewBag.rol == "candidat")
                     {
                         <button type="button" class="btn btn-default " style="color:white" onclick="location.href='@Url.Action("Details", "Users", new { email = User.Identity.Name })'" data-dismiss="modal">Go to your profile</button>
                     }
 
 
 
+                  
 
                     <br />
                     <br />

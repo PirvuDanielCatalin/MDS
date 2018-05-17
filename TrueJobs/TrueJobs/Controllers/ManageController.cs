@@ -72,7 +72,8 @@ namespace TrueJobs.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-            //if (User.IsInRole("companie")) ViewBag.rol = "companie";
+            if (User.IsInRole("companie")) ViewBag.rol = "companie";
+            else if (User.IsInRole("candidat")) ViewBag.rol = "candidat";
             return View(model);
         }
 
