@@ -92,12 +92,19 @@
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            <p>buna</p>
-
+                            <br />
                             <a href="@Url.Action("Create", "Jobs")" class="btn btn-default"><b>Adauga job</b></a>
-                            
-                            
-                            
+
+                            @*@Html.Partial("CompanyJobs")*@
+                            @*@Html.Action("Companies", "CompanyJobs", new { id = 15});*@
+                            @*@Html.Partial("CompanyJobs", new ViewDataDictionary { { "id", 15 } })*@
+
+
+                            @Html.Action("CompanyJobs", "Jobs", new { ID = Model.Company_ID })
+
+
+
+
                             <!-- /.post -->
                         </div>
                         <!-- /.tab-pane -->

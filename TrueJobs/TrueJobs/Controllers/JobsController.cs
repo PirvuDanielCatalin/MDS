@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrueJobs;
+using PagedList;
 
 namespace TrueJobs.Controllers
 {
@@ -143,5 +144,61 @@ namespace TrueJobs.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult CompanyJobs(int id, string sortOrder, string searchString,
+            string currentFilter, int? page)
+        {
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "RecordName" ? "date_desc" : "RecordName";
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+
+            var jobs = from s in db.Jobs
+                            select s;
+
+            jobs = jobs.Where(s => s.Company_ID == id);
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    //words = words.OrderByDescending(s => s.Title);
+                    jobs = jobs.OrderByDescending(s => s.Name);
+                    // model = model.OrderByDescending(s => s.Tag_name);
+
+                    break;
+                default:  // Name ascending 		
+                          // words = words.OrderBy(s => s.Word);
+                    jobs = jobs.OrderBy(s => s.Name);
+                    // model = model.OrderBy(s => s.Tag_name);
+                    break;
+            }
+
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
+
+
+
+        }
+
+
+
     }
 }

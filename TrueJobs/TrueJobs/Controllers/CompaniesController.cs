@@ -9,6 +9,9 @@ using System.Web;
 using System.Web.Mvc;
 using TrueJobs;
 
+
+using PagedList;
+
 namespace TrueJobs.Controllers
 {
     public class CompaniesController : Controller
@@ -134,6 +137,7 @@ namespace TrueJobs.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {
