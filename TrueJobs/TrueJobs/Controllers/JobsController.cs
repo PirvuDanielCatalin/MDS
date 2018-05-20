@@ -16,10 +16,82 @@ namespace TrueJobs.Controllers
         private JobsEntities2 db = new JobsEntities2();
 
         // GET: Jobs
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string experience,
+            string currentFilter, int? page)
         {
+
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "RecordName" ? "date_desc" : "RecordName";
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+
+            var jobs = from s in db.Jobs.Include(p => p.Company).Include(p => p.Interest).Include(p => p.Applications)
+                       select s;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // query = query.Where(s => s.Title.Contains(searchString));
+                //words = words.Where(s => s.Title.Contains(searchString));
+                jobs = jobs.Where(s => s.Name.Contains(searchString));
+
+                /*
+                var jobs = (from m in db.Jobs
+                              where m.Name == searchString
+                              select m).FirstOrDefault();
+                */
+            }
+
+            if (!string.IsNullOrEmpty(experience))
+            {
+                // query = query.Where(s => s.Title.Contains(searchString));
+                //words = words.Where(s => s.Title.Contains(searchString));
+                jobs = jobs.Where(s => s.Experience.ToString().Contains(experience));
+
+                /*
+                var produs = (from m in db.Jobs
+                              where m.Name == searchString
+                              select m).FirstOrDefault();
+                */
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    //words = words.OrderByDescending(s => s.Title);
+                    jobs = jobs.OrderByDescending(s => s.Name);
+                    // model = model.OrderByDescending(s => s.Tag_name);
+
+                    break;
+                default:  // Name ascending 		
+                          // words = words.OrderBy(s => s.Word);
+                    jobs = jobs.OrderBy(s => s.Name);
+                    // model = model.OrderBy(s => s.Tag_name);
+                    break;
+            }
+
+
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
+            /*
             var jobs = db.Jobs.Include(j => j.Company).Include(j => j.Interest);
             return View(jobs.ToList());
+            */
         }
 
         // GET: Jobs/Details/5
@@ -53,7 +125,7 @@ namespace TrueJobs.Controllers
         public ActionResult Create(Job job)
         {
 
-         
+
 
             if (ModelState.IsValid)
             {
@@ -63,13 +135,13 @@ namespace TrueJobs.Controllers
 
                 db.Jobs.Add(job);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd()});
+                return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd() });
             }
 
 
-          
 
-            
+
+
             ViewBag.Company_ID = new SelectList(db.Companies, "Company_ID", "Name", job.Company_ID);
             ViewBag.Interest_ID = new SelectList(db.Interests, "Interest_ID", "Name", job.Interest_ID);
             return View(job);
@@ -170,7 +242,7 @@ namespace TrueJobs.Controllers
 
 
             var jobs = from s in db.Jobs
-                            select s;
+                       select s;
 
             jobs = jobs.Where(s => s.Company_ID == id);
 
@@ -190,7 +262,7 @@ namespace TrueJobs.Controllers
             }
 
 
-            int pageSize = 10;
+            int pageSize = 50;
             int pageNumber = (page ?? 1);
             return View(jobs.ToPagedList(pageNumber, pageSize));
 

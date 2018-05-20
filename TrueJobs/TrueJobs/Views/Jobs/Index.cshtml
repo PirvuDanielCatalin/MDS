@@ -1,83 +1,291 @@
-﻿@model IEnumerable<TrueJobs.Job>
+﻿@*@model IEnumerable<TrueJobs.Job>*@
+
+
+@model PagedList.IPagedList<TrueJobs.Job>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Requirements)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Interest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Experience)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Attributes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company.Name)
-        </th>
-    
-        <th></th>
-    </tr>
+<head>
+    <link href="~/Content/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 142, 99, 0.1), rgba(0, 0, 0, 0.1)), url('../../Content/img_biz/1.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Requirements)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Interest.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Attributes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company.Name)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Job_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Job_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Job_ID })
-        </td>
-    </tr>
+        a:hover {
+            text-decoration: none;
+        }
+
+
+
+
+        .hovereffect {
+            width: 100%;
+            height: 100%;
+            margin: 10px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            cursor: default;
+            background:;
+        }
+
+            .hovereffect .overlay {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                overflow: hidden;
+                top: 0;
+                background-color: #18d26e;
+                left: 0;
+                padding: 50px 20px;
+            }
+
+            .hovereffect img {
+                display: block;
+                position: relative;
+                max-width: none;
+                height: 100px;
+                width: calc(100% + 20px);
+                -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+                transition: opacity 0.35s, transform 0.35s;
+                -webkit-transform: translate3d(-10px,0,0);
+                transform: translate3d(-10px,0,0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+            .hovereffect:hover img {
+                opacity: 0.4;
+                filter: alpha(opacity=40);
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+            }
+
+            .hovereffect h4 {
+                text-transform: uppercase;
+                color: #fff;
+                text-align: center;
+                position: relative;
+                font-size: 17px;
+                overflow: hidden;
+                padding: 0.5em 0;
+                background-color: transparent;
+            }
+
+                .hovereffect h4:after {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: #fff;
+                    content: '';
+                    -webkit-transition: -webkit-transform 0.35s;
+                    transition: transform 0.35s;
+                    -webkit-transform: translate3d(-100%,0,0);
+                    transform: translate3d(-100%,0,0);
+                }
+
+            .hovereffect:hover h4:after {
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+            }
+
+            .hovereffect a, .hovereffect p {
+                color: #FFF;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+                transition: opacity 0.35s, transform 0.35s;
+                -webkit-transform: translate3d(100%,0,0);
+                transform: translate3d(100%,0,0);
+            }
+
+            .hovereffect:hover a, .hovereffect:hover p {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+            }
+    </style>
+</head>
+
+
+<main id="main" style="margin-top:100px">
+
+
+
+    <br />
+    <br />
+    <br />
+
+    <section class="content">
+        <h2>Jobs</h2>
+        <br />
+        <br />
+        <br />
+
+
+        @using (Html.BeginForm("Index", "Jobs", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+
+                    <input type="text" name="SearchString" class="form-actions" value="@ViewData["currentFilter"]" placeholder="Find by Name" />
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <input type="text" name="experience" class="form-actions" value="@ViewData["currentFilter"]" placeholder="Find by Experience" />
+
+                </div>
+
+                <div class=" col-md-2">
+                    <input type="submit" value="Search" class="btn btn-default btn-primary" style=" color:white;  width:75px" />
+
+                    <a href="@Url.Action("Index", "Jobs", new { id = "" })" class="btn btn-default btn-primary " style="color:#fff;width:75px">Reset</a>
+
+                    @*<a href="@Url.Action("Scan2", "Produs")" class="btn btn-default btn-primary" style="color:#fff; margin-top:10px; width:75px">Scan</a>*@
+                </div>
+
+
+
+                <div class="col-md-1">
+
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <br />  
+
 }
 
-</table>
+
+
+        <div class="container">
+            <div class="row">
+
+                @foreach (var item in Model)
+            {
+                <div class="col-lg-2 col-md-3 col-sm-5 col-xs-11">
+                    <div class="hovereffect">
+
+                        <div class=" img-responsive" style="height:200px"></div>
+                        <div class="overlay" onclick="location.href='@Url.Action("Details", "Jobs", new { id = item.Job_ID })'">
+                          
+                            <h4>@item.Name</h4>
+                            <p><a href="@Url.Action("Details", "Jobs", new { id = item.Job_ID })">Detalii</a></p>
+
+                        </div>
+                    </div>
+                </div>
+        }
+
+
+            </div>
+
+        </div>
+
+
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)din @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                                        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentFilter2 = ViewBag.Taguri }))
+
+
+
+        <br />
+        <br />
+        <br />
+
+
+    </section>
+
+
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Requirements)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Interest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Experience)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Attributes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company.Name)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requirements)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Interest.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Experience)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attributes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company.Name)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Job_ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Job_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Job_ID })
+                    </td>
+                </tr>
+            }
+
+        </table>*@
+</main>

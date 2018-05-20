@@ -21,21 +21,14 @@
         <th>
             Location
         </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Requirements
-        </th>
+       
         <th>
             Type
         </th>
         <th>
             Experience
         </th>
-        <th>
-            Attributes
-        </th>
+       
         <th>
             Company Name
         </th>
@@ -54,21 +47,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Requirements)
-            </td>
+          
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Experience)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attributes)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Company.Name)
             </td>
@@ -87,6 +74,6 @@
 
 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)din @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
+@Html.PagedListPager(Model, page => Url.Action("CompanyJobs",
                                                                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentFilter2 = ViewBag.Taguri }))
 

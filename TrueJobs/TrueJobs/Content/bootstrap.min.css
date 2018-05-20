@@ -1915,13 +1915,13 @@ textarea.input-lg {
 
 .btn-primary {
     color: #fff;
-    background-color: #428bca;
-    border-color: #357ebd
+    background-color: #18d26e;
+    border-color: #18d26e
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
         color: #fff;
-        background-color: #3276b1;
+        background-color: forestgreen;
         border-color: #285e8e
     }
 
