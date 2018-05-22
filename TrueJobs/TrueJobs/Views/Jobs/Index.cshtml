@@ -152,7 +152,7 @@
     <br />
 
     <section class="content">
-        <h2>Jobs</h2>
+       
         <br />
         <br />
         <br />
@@ -161,7 +161,9 @@
         @using (Html.BeginForm("Index", "Jobs", FormMethod.Get))
     {
         <div class="row">
+           
             <div class="col-md-12">
+                <h2 style="margin-left:10%">Jobs</h2>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
 
@@ -177,18 +179,18 @@
 
                 <div class="col-md-2">
                     @Html.DropDownList("Interest",
-                                                                new SelectList(ViewBag.Interest, "Interest_ID", "Name"),
-                                                                "Find by interest",
-                                                                new { @class = "form-control dropstil" })
+                                                      new SelectList(ViewBag.Interest, "Interest_ID", "Name"),
+                                                      "Find by interest",
+                                                      new { @class = "form-control dropstil" })
 
                 </div>
 
 
                 <div class="col-md-2">
-                   
+
                     <div class="col-md-10">
                         @Html.DropDownList("Location", listItems, "-- Select City --", new { @class = "form-control dropstil" })
-                       
+
                     </div>
                 </div>
 
