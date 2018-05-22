@@ -121,6 +121,12 @@ namespace TrueJobs.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Job job = db.Jobs.Find(id);
+            Company com = db.Companies.SingleOrDefault(d=>d.Company_ID == job.Company_ID);
+
+            ViewBag.emailcompanie = com.Email;
+            ViewBag.telefon = com.Phone;
+            
+
             if (job == null)
             {
                 return HttpNotFound();
