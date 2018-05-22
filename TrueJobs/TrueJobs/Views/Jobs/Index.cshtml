@@ -6,6 +6,19 @@
 
 @{
     ViewBag.Title = "Index";
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Alba",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Arad"
+
+    });
+
 }
 
 
@@ -116,6 +129,16 @@
                 -webkit-transform: translate3d(0,0,0);
                 transform: translate3d(0,0,0);
             }
+
+
+        .dropstil {
+            height: 35px;
+            border-radius: 8px;
+            margin: 8px 0;
+            outline: 0;
+        }
+
+
     </style>
 </head>
 
@@ -142,20 +165,38 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
 
-                    <input type="text" name="SearchString" class="form-actions" value="@ViewData["currentFilter"]" placeholder="Find by Name" />
+                    <input type="text" name="SearchString" class="form-actions dropstil" value="@ViewData["currentFilter"]" placeholder="Find by Name" />
 
                 </div>
 
                 <div class="col-md-2">
 
-                    <input type="text" name="experience" class="form-actions" value="@ViewData["currentFilter"]" placeholder="Find by Experience" />
+                    <input type="text" name="experience" class="form-actions dropstil" @*value="@ViewData["currentFilter"]"*@ placeholder="Find by Experience" />
 
                 </div>
 
-                <div class=" col-md-2">
-                    <input type="submit" value="Search" class="btn btn-default btn-primary" style=" color:white;  width:75px" />
+                <div class="col-md-2">
+                    @Html.DropDownList("Interest",
+                                                                new SelectList(ViewBag.Interest, "Interest_ID", "Name"),
+                                                                "Find by interest",
+                                                                new { @class = "form-control dropstil" })
 
-                    <a href="@Url.Action("Index", "Jobs", new { id = "" })" class="btn btn-default btn-primary " style="color:#fff;width:75px">Reset</a>
+                </div>
+
+
+                <div class="col-md-2">
+                   
+                    <div class="col-md-10">
+                        @Html.DropDownList("Location", listItems, "-- Select City --", new { @class = "form-control dropstil" })
+                       
+                    </div>
+                </div>
+
+
+                <div class=" col-md-2">
+                    <input type="submit" value="Search" class="btn btn-default btn-primary" style=" color:white;  width:75px;  margin-top:10px;" />
+
+                    <a href="@Url.Action("Index", "Jobs", new { id = "" })" class="btn btn-default btn-primary " style="color:#fff;width:75px;  margin-top:10px;">Reset</a>
 
                     @*<a href="@Url.Action("Scan2", "Produs")" class="btn btn-default btn-primary" style="color:#fff; margin-top:10px; width:75px">Scan</a>*@
                 </div>

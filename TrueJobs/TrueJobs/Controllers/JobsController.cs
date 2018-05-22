@@ -17,7 +17,7 @@ namespace TrueJobs.Controllers
 
         // GET: Jobs
         public ActionResult Index(string sortOrder, string searchString, string experience,
-            string currentFilter, int? page)
+            string currentFilter, string Interest, string Location, int? page)
         {
 
 
@@ -69,6 +69,25 @@ namespace TrueJobs.Controllers
                 */
             }
 
+            if (!String.IsNullOrEmpty(Interest))
+            {
+                int IDInterest = Int32.Parse(Interest);
+
+                jobs = from e in jobs
+                           join de in db.Interests on e.Interest_ID equals de.Interest_ID
+                           where de.Interest_ID == IDInterest
+                           select e;
+                //ViewBag.EmpSel = Employee;
+
+            }
+
+            IEnumerable<Interest> inte = db.Interests.ToList();
+            ViewBag.Interest = inte;
+
+            if(!String.IsNullOrEmpty(Location))
+            {
+                jobs = jobs.Where(s=>s.Location.Contains(Location));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
