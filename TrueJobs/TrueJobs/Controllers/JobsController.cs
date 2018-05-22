@@ -194,7 +194,8 @@ namespace TrueJobs.Controllers
             {
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                // return RedirectToAction("Index");
+                return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd()});
             }
             ViewBag.Company_ID = new SelectList(db.Companies, "Company_ID", "Name", job.Company_ID);
             ViewBag.Interest_ID = new SelectList(db.Interests, "Interest_ID", "Name", job.Interest_ID);
@@ -224,7 +225,7 @@ namespace TrueJobs.Controllers
             Job job = db.Jobs.Find(id);
             db.Jobs.Remove(job);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd() });
         }
 
         protected override void Dispose(bool disposing)
