@@ -96,7 +96,8 @@ namespace TrueJobs.Controllers
             {
                 db.Entry(writeCV).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", "WriteCVs", new { id = writeCV.WritecvID});
             }
             ViewBag.User_ID = new SelectList(db.Users, "User_ID", "FirstName", writeCV.User_ID);
             return View(writeCV);

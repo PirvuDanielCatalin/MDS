@@ -52,9 +52,11 @@
 
                                 <h3 class="profile-username text-center">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
 
+                                @if (User.IsInRole("candidat"))
+                                {
                                 <a href="@Url.Action("Edit", "Users", new { id = ViewBag.userID })" class="btn btn-default"><b>Edit profile</b></a>
-
-
+                                }
+                                <a href="@Url.Action("Details", "WriteCVs", new { id = ViewBag.writecv })" class="btn btn-default"><b>View CV</b></a>
 
                                 @*<ul class="list-group list-group-unbordered">
             <li class="list-group-item">

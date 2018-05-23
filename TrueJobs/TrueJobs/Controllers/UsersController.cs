@@ -31,6 +31,8 @@ namespace TrueJobs.Controllers
             //User user = db.Users.Find(id);
             User user = db.Users.SingleOrDefault(d => d.Email == email);
             ViewBag.userID = user.User_ID;
+            WriteCV wrcv = db.WriteCVs.SingleOrDefault(d=> d.User_ID == user.User_ID);
+            ViewBag.writecv = wrcv.WritecvID;
             if (user == null)
             {
                 return HttpNotFound();
