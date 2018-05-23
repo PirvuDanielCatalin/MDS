@@ -101,13 +101,28 @@ namespace TrueJobs.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Include = "Company_ID,Name,Email,Location")] */Company company)
+        public ActionResult Edit(HttpPostedFileBase file2, Company company)
         {
             if (ModelState.IsValid)
             {
+
+                if (file2 != null && file2.ContentLength > 0)
+                {
+                    // extract only the filename
+                    var fileName = Path.GetFileNameWithoutExtension(file2.FileName) + " _ " + DateTime.Now.ToString("ddHmmss") + Path.GetExtension(file2.FileName);
+                    var path = Path.Combine(Server.MapPath("~/imgpoze"), fileName);
+                    company.Photo = fileName;
+                    file2.SaveAs(path);
+
+
+
+                }
+
                 db.Entry(company).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", new { email = company.Email });
+
             }
             return View(company);
         }
