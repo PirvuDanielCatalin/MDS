@@ -9,6 +9,10 @@ using System.Web.Mvc;
 using TrueJobs;
 using PagedList;
 
+using System.Net;
+using System.Net.Mail;
+using System.Web.Helpers;
+
 namespace TrueJobs.Controllers
 {
     public class JobsController : Controller
@@ -74,9 +78,9 @@ namespace TrueJobs.Controllers
                 int IDInterest = Int32.Parse(Interest);
 
                 jobs = from e in jobs
-                           join de in db.Interests on e.Interest_ID equals de.Interest_ID
-                           where de.Interest_ID == IDInterest
-                           select e;
+                       join de in db.Interests on e.Interest_ID equals de.Interest_ID
+                       where de.Interest_ID == IDInterest
+                       select e;
                 //ViewBag.EmpSel = Employee;
 
             }
@@ -84,9 +88,9 @@ namespace TrueJobs.Controllers
             IEnumerable<Interest> inte = db.Interests.ToList();
             ViewBag.Interest = inte;
 
-            if(!String.IsNullOrEmpty(Location))
+            if (!String.IsNullOrEmpty(Location))
             {
-                jobs = jobs.Where(s=>s.Location.Contains(Location));
+                jobs = jobs.Where(s => s.Location.Contains(Location));
             }
             switch (sortOrder)
             {
@@ -113,6 +117,7 @@ namespace TrueJobs.Controllers
             */
         }
 
+
         // GET: Jobs/Details/5
         public ActionResult Details(int? id)
         {
@@ -121,11 +126,13 @@ namespace TrueJobs.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Job job = db.Jobs.Find(id);
-            Company com = db.Companies.SingleOrDefault(d=>d.Company_ID == job.Company_ID);
+
+
+            Company com = db.Companies.SingleOrDefault(d => d.Company_ID == job.Company_ID);
 
             ViewBag.emailcompanie = com.Email;
             ViewBag.telefon = com.Phone;
-            
+
 
             if (job == null)
             {
@@ -201,7 +208,7 @@ namespace TrueJobs.Controllers
                 db.Entry(job).State = EntityState.Modified;
                 db.SaveChanges();
                 // return RedirectToAction("Index");
-                return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd()});
+                return RedirectToAction("Details", "Companies", new { email = User.Identity.Name.TrimEnd() });
             }
             ViewBag.Company_ID = new SelectList(db.Companies, "Company_ID", "Name", job.Company_ID);
             ViewBag.Interest_ID = new SelectList(db.Interests, "Interest_ID", "Name", job.Interest_ID);
@@ -353,6 +360,57 @@ namespace TrueJobs.Controllers
         }
 
 
+        public ActionResult Aplica(int id, Application app)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                app.Job_ID = id;
+                User user = db.Users.SingleOrDefault(s=>s.Email == User.Identity.Name.TrimEnd());
+                app.User_ID = user.User_ID;
+
+                db.Applications.Add(app);
+                db.SaveChanges();
+
+
+
+                Job job = db.Jobs.SingleOrDefault(s => s.Job_ID == id);
+                Company comp = db.Companies.SingleOrDefault(s => s.Company_ID == job.Company_ID);
+
+
+                string body = "Candidatul "+ user.LastName + " " + user.FirstName + "a aplicat la job-ul dvs!";
+                string Body = "Am aplicat la job-ul dvs!";
+                string subject = "Aplicare job";
+                string Subject = "Aplicare job";
+
+
+                WebMail.SmtpServer = "smtp.gmail.com";
+                //gmail port to send emails  
+                WebMail.SmtpPort = 587;
+                WebMail.SmtpUseDefaultCredentials = true;
+                //sending emails with secure protocol  
+                WebMail.EnableSsl = true;
+                //EmailId used to send emails from application  
+                WebMail.UserName = "truejobsproiect@gmail.com";
+                WebMail.Password = "truejobsproiect@1234..";
+
+                //Sender email address.  
+                WebMail.From = "truejobsproiect@gmail.com";
+
+                //Send email  
+                WebMail.Send(to: comp.Email, subject: subject, body: body, cc: "", bcc: "", isBodyHtml: true);
+                ViewBag.Status = "Email Sent Successfully.";
+
+            }
+        
+
+
+
+
+
+            return Content("<script language='javascript' type='text/javascript'>alert('Ai aplicat cu succes'); window.location.href = 'http://localhost:50961/Jobs/Index/' ;</script>");
+        }
 
 
 

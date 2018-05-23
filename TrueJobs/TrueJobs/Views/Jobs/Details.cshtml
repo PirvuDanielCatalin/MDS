@@ -35,6 +35,13 @@
 
 
         <h3>@Model.Name</h3>
+
+        @if (User.Identity.IsAuthenticated) { 
+        <a href="@Url.Action("Aplica", "Jobs", new { id = Model.Job_ID})" class="btn btn-default"><b>Aplica la job</b></a>
+        
+        }
+        <br />
+        <br />
         <div class="row">
             <div class="col-md-3">
 
