@@ -89,6 +89,8 @@
 
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
+                            <p><b>Interes</b></p> <br />
+                            <p>@Model.Interest.Name</p>
                             <p><b>Descriere</b></p> <br />
                             <p>@Model.Description</p>
                             <br />
@@ -100,6 +102,12 @@
                             <p>@Model.Experience</p>
                             <p><b>Atribute</b></p> <br />
                             <p>@Model.Attributes</p>
+                        </div>
+
+                        <div class="tab-pane" id="timeline">
+                            <p>Sim</p>
+
+                            @Html.Action("SimilarJobs", "Jobs", new { ID = Model.Job_ID })
                         </div>
 
                     </div>

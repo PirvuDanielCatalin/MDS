@@ -298,5 +298,63 @@ namespace TrueJobs.Controllers
 
 
 
+
+
+        public ActionResult SimilarJobs(int id, string sortOrder, string searchString,
+            string currentFilter, int? page)
+        {
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "RecordName" ? "date_desc" : "RecordName";
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            Job jobinitial = db.Jobs.Find(id);
+
+            var jobs = from s in db.Jobs
+                       select s;
+
+            jobs = jobs.Where(s => s.Interest_ID == jobinitial.Interest_ID && s.Job_ID != jobinitial.Job_ID);
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    //words = words.OrderByDescending(s => s.Title);
+                    jobs = jobs.OrderByDescending(s => s.Name);
+                    // model = model.OrderByDescending(s => s.Tag_name);
+
+                    break;
+                default:  // Name ascending 		
+                          // words = words.OrderBy(s => s.Word);
+                    jobs = jobs.OrderBy(s => s.Name);
+                    // model = model.OrderBy(s => s.Tag_name);
+                    break;
+            }
+
+
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
+
+
+
+        }
+
+
+
+
+
     }
 }

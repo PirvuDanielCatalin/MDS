@@ -402,6 +402,7 @@
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\Jobs\CompanyJobs.cshtml" />
+    <Content Include="Views\Jobs\SimilarJobs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
