@@ -51,7 +51,7 @@
     listItems.Add(new SelectListItem
     {
         Text = "Alba",
-        Selected = true
+      
     });
     listItems.Add(new SelectListItem
     {
@@ -418,7 +418,7 @@
             @Html.LabelFor(model => model.Job_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Job_ID, new { htmlAttributes = new { @class = "form-control" } })
-				<div class="form-group">
+                <div class="form-group">
                         <div class="control-label col-md-2" style="color:black">Judet</div>
                         <div class="col-md-10">
                             @Html.DropDownListFor(model => model.Location, listItems, "-- Select location--", new { @class = "form-control" })
@@ -439,14 +439,14 @@
                     </div>
 
 
-                    @*trebuie sa apara lista de orase ca la User-create*@
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="control-label col-md-2" style="color:black">Judet</div>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => model.Location, listItems, "-- Select location--", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
 
 
 
