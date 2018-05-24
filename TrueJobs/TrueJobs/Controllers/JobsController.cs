@@ -132,7 +132,7 @@ namespace TrueJobs.Controllers
 
             ViewBag.emailcompanie = com.Email;
             ViewBag.telefon = com.Phone;
-
+            ViewBag.nume = com.Name;
 
             if (job == null)
             {

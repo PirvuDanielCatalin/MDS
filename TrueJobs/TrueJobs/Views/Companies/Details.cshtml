@@ -110,7 +110,9 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="timeline">
                             <!-- The timeline -->
-                            <p>ceva</p>
+                         
+
+                            @Html.Action("Index", "Applications", new { email = Model.Email.TrimEnd() })
 
                         </div>
                         <!-- /.tab-pane -->
