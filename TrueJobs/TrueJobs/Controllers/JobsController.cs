@@ -118,6 +118,11 @@ namespace TrueJobs.Controllers
         }
 
 
+        public ActionResult JobList()
+        {
+            return View();
+        }
+
         // GET: Jobs/Details/5
         public ActionResult Details(int? id)
         {

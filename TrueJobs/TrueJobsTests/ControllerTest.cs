@@ -25,6 +25,7 @@ namespace TrueJobsTests
         [TestMethod]
         public void Index()
         {
+            /*
             //Arrange
             WriteCVsController controller = new WriteCVsController();
 
@@ -33,6 +34,11 @@ namespace TrueJobsTests
 
             //Assert
             Assert.IsNotNull(res);
+            */
+
+            HomeController controller = new HomeController();
+            ViewResult result = controller.Index() as ViewResult;
+            Assert.IsNotNull(result);
 
         }
 
@@ -40,15 +46,23 @@ namespace TrueJobsTests
         public void Create()
         {
             //Arrange
-            WriteCVsController controller = new WriteCVsController();
+            /*WriteCVsController controller = new WriteCVsController();
 
             //Act
             ViewResult res = controller.Index() as ViewResult;
 
             //Assert
             Assert.IsNotNull(res);
+            */
+
+            UsersController controller = new UsersController();
+            ViewResult result = controller.Create() as ViewResult;
+            Assert.IsNotNull(result);
 
         }
+
+   
+
 
 
 
